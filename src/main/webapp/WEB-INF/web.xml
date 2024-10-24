@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+    <display-name>Sample Web Application</display-name>
+
+    <welcome-file-list>
+        <welcome-file>/jsp/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>503</error-code>
+        <location>/error/503.html</location>
+    </error-page>
+
+	<error-page>
+		<exception-type>java.lang.Throwble</exception-type>
+		<location>/WEB-INF/view/error/error.jsp</location>
+	</error-page>
+	
+	<jsp-config>
+		<taglib>
+			<taglib-uri>kr.ac.kku.cs.wp.DaeKuen16.tools.tags.custom</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/custom.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+    <!-- AuthenticationFilter  -->
+
+    <!--<filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>kr.ac.kku.cs.wp.kang.aaa.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>valve</param-name>
+            <param-value>on</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/jsp/user/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/jsp/admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/logout</url-pattern>
+    </filter-mapping>-->
+
+    <!-- AuthorityFilter  -->
+
+    <!--<filter>
+        <filter-name>AuthorityFilter</filter-name>
+        <filter-class>kr.ac.kku.cs.wp.kang.aaa.AuthorityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorityFilter</filter-name>
+        <url-pattern>/jsp/admin/*</url-pattern>
+    </filter-mapping>
+-->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>
