@@ -1,7 +1,9 @@
 package kr.ac.kku.cs.wp.DaeKuen16.aaa;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +41,9 @@ public class LoginControllerServlet extends HttpServlet {
         log("in post: " + uriStr);
 
         logger.entry();
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss,SSS");
+        Date now = new Date();
+        String formattedDate = sdf.format(now);
         if (uriStr.equals("/login")) { // 로그인 처리
             String id = req.getParameter("username");
             String password = req.getParameter("password");
@@ -47,16 +51,23 @@ public class LoginControllerServlet extends HttpServlet {
             // DB에서 사용자 정보를 가져옴
             User user = userService.getUserById(id);  // DB에서 사용자 ID로 사용자 조회
             
-            if (user == null) {  // 사용자가 존재하지 않으면
+            
+            if (user == null) {  // 사용자가 존재하지 않으면0
+            	logger.info(id + "[" + req.getRemoteAddr() + "] failed to log in at " + formattedDate);
+            	
                 req.setAttribute("error", "login_fail");
                 req.getRequestDispatcher("/WEB-INF/view/auth/login.jsp").forward(req, resp);
             } else {
                 log(password);
                 log(user.getPassword());
                 if (!password.equals(user.getPassword())) {  // 비밀번호가 일치하지 않으면
+                	logger.info(id + "[" + req.getRemoteAddr() + "] failed to log in at " + formattedDate);
+                	
                     req.setAttribute("error", "login_fail");
                     req.getRequestDispatcher("/WEB-INF/view/auth/login.jsp").forward(req, resp);
                 } else {
+                	logger.info(user.getName() + "(" + user.getId() + ") has logged in at " + formattedDate);
+                	
                     HttpSession session = req.getSession();
                     Account ac = new Account();
                     ac.setId(id);
@@ -72,6 +83,9 @@ public class LoginControllerServlet extends HttpServlet {
             if (session != null) {
                 session.invalidate();
             }
+            
+            Account account = (Account) session.getAttribute("user");
+            logger.info(account.getName() + "(" + account.getId() + ") has logged out at " + formattedDate);
             resp.sendRedirect(context + "/login");
         }
     }

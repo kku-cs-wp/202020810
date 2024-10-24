@@ -9,18 +9,8 @@ https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
         <welcome-file>/jsp/index.jsp</welcome-file>
     </welcome-file-list>
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error/404.html</location>
-    </error-page>
-
-    <error-page>
-        <error-code>503</error-code>
-        <location>/error/503.html</location>
-    </error-page>
-
 	<error-page>
-		<exception-type>java.lang.Throwble</exception-type>
+		<exception-type>java.lang.Throwable</exception-type>
 		<location>/WEB-INF/view/error/error.jsp</location>
 	</error-page>
 	

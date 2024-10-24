@@ -389,17 +389,15 @@
             <nav>
                 <ul>
                 	<li><a href="#" onclick="loadPage('home','html/home.html')">홈</a></li>
-                	<%-- <c:if test = "${not empty sessionScope.user}"> --%>
                 	<c:if test = "${not empty sessionScope.user}">
                     	<li><a href="#" onclick="toggleSubmenu()">사용자 관리</a></li>
                     	<ul id="submenu" class="submenu">
                         <li><a href="#" onclick="loadPage('userList', 'user/userlist')">사용자 목록</a></li>
                         <li><a href="#" onclick="loadPage('userForm', 'html/user-form.html')">사용자 입력</a></li>
                     	</ul>
-                    	<li><a href="#" onclick="loadPage('service', '../../html/service.html')">서비스</a></li>
-                    	<li><a href="#" onclick="loadPage('contact', '../../html/contact.html')">연락처</a></li>
+                    	<li><a href="#" onclick="loadPage('service', 'service.html')">서비스</a></li>
+                    	<li><a href="#" onclick="loadPage('contact', 'contact.html')">연락처</a></li>
                 	</c:if>
-                	<%-- </c:if> --%>
                 </ul>
             </nav>
         </div>

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class ConnectionUtilTest {
     @Test
-    void testConnection() throws SQLException{
+    public void testConnection() throws SQLException{
     	try (Connection conn = ConnectionUtil.getConnection()){
     		conn.commit();
     	}catch (Exception e) {

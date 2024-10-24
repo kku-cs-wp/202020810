@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
-    <Appenders>
-        <!-- {github 계정}.log 파일 설정 -->
-        <RollingFile name="GithubAccountLogger" fileName="/tmp/cswp/logs/202020810/DaeKuen16.log"
-                     filePattern="/tmp/cswp/logs/202020810/DaeKuen16.log.%d{yyyy-MM-dd}.gz">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10MB"/>
-            </Policies>
-            <DefaultRolloverStrategy max="5"/>
-        </RollingFile>
+	<RollingFile name="RollingFileAppender"
+		fileName="/tmp/cswp/logs/202020810/DaeKuen16.log"
+		filePattern="/tmp/cswp/logs/202020810/DaeKuen16-%d{yyyy-MM-dd}-%i.log.gz">
+		<PatternLayout>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n
+			</pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy />
+			<SizeBasedTriggeringPolicy size="10B" />
+		</Policies>
+		<!-- 압축된 로그 파일 최대 보관 갯수 설정 -->
+		<DefaultRolloverStrategy max="60" />
+	</RollingFile>
 
-        <!-- {github 계정}_info.log 파일 설정 -->
-        <RollingFile name="GithubAccountInfoLogger" fileName="/tmp/cswp/logs/202020810/DaeKuen16_info.log"
-                     filePattern="/tmp/cswp/logs/202020810/DaeKuen16_info.log.%d{yyyy-MM-dd}.gz">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10MB"/>
-            </Policies>
-            <DefaultRolloverStrategy max="5"/>
-        </RollingFile>
-    </Appenders>
-
-    <Loggers>
-        <!-- kr.ac.kku.cs.wp.{github 계정} package 이하 trace level 이상 출력 -->
-        <Logger name="kr.ac.kku.cs.wp.DaeKuen16" level="trace" additivity="false">
-            <AppenderRef ref="GithubAccountLogger"/>
-        </Logger>
-
-        <!-- 나머지 패키지는 fatal level만 출력 -->
-        <Root level="fatal">
-            <AppenderRef ref="GithubAccountLogger"/>
-        </Root>
-
-        <!-- kr.ac.kku.cs.wp.{github 계정} package 이하에서 info level 로그 기록 -->
-        <Logger name="kr.ac.kku.cs.wp.DaeKuen16" level="info" additivity="false">
-            <AppenderRef ref="GithubAccountInfoLogger"/>
-        </Logger>
-    </Loggers>
+	<!-- INFO 로그 전용 롤링 파일 Appender -->
+	<RollingFile name="InfoFileAppender"
+		fileName="/tmp/cswp/logs/202020810/DaeKuen16_info.log"
+		filePattern="/tmp/cswp/logs/202020810/DaeKuen16_info-%d{yyyy-MM-dd}.log.gz">
+		<PatternLayout>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n
+			</pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy />
+		</Policies>
+		<Filters>
+			<!-- INFO 레벨 로그만 허용하는 필터 -->
+			<ThresholdFilter level="info" onMatch="ACCEPT"
+				onMismatch="DENY" />
+		</Filters>
+		<!-- 압축된 로그 파일 최대 보관 갯수 설정 -->
+		<DefaultRolloverStrategy max="60" />
+	</RollingFile>
+	<Root level="trace">
+		<AppenderRef ref="Console" />
+		<AppenderRef ref="RollingFileAppender" />
+	</Root>
+	<Logger name="kr.ac.kku.cs.wp.DaeKuen16" level="info">
+		<AppenderRef ref="InfoFileAppender" />
+	</Logger>
 </Configuration>

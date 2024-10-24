@@ -1,4 +1,4 @@
-package kr.ac.kku.cs.wp.DaeKuen16.mapper;
+package kr.ac.kku.cs.wp.DaeKuen16.user.mapper;
 
 import java.util.List;
 import java.util.Map;

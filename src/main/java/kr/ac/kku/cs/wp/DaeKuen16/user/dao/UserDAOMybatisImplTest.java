@@ -2,6 +2,7 @@ package kr.ac.kku.cs.wp.DaeKuen16.user.dao;
 
 import static org.junit.Assert.assertNotNull;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import kr.ac.kku.cs.wp.DaeKuen16.mapper.UserMapper;
+import kr.ac.kku.cs.wp.DaeKuen16.user.mapper.UserMapper;
 import kr.ac.kku.cs.wp.DaeKuen16.support.sql.MybatisUtil;
 import kr.ac.kku.cs.wp.DaeKuen16.user.entity.Role;
 import kr.ac.kku.cs.wp.DaeKuen16.user.entity.User;
@@ -25,7 +26,7 @@ public class UserDAOMybatisImplTest {
     private static final Logger logger = LogManager.getLogger(UserDAOMybatisImplTest.class);
 
     @Test
-    void testGetUserById() {
+    public void testGetUserById() {
         UserDAO dao = new UserDAOMybatisImpl();
         User user = dao.getUserById("kku_1001");
         assertNotNull(user);
@@ -42,7 +43,7 @@ public class UserDAOMybatisImplTest {
     }
 
     @Test
-    void testGetUsers() {
+    public void testGetUsers() {
         UserDAO userDao = new UserDAOMybatisImpl();
         List<User> users = userDao.getUsers(null);
         assertNotNull(users);

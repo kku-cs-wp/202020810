@@ -8,8 +8,8 @@ public class ConnectionUtil {
 
     // MySQL 연결 정보 설정 (URL, 사용자, 비밀번호)
     private static final String URL = "jdbc:mysql://localhost:3306/cswp_202020810?serverTimezone=UTC";
-    private static final String USER = "Dkeun16";
-    private static final String PASSWORD = "Dkeun16";
+    private static final String USER = "DaeKuen16";
+    private static final String PASSWORD = "202020810";
 
     // static 영역에서 JDBC 드라이버 로딩
     static {

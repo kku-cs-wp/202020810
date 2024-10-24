@@ -13,8 +13,8 @@ public class ConnectionPoolUtil {
 		try {
 			HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:mysql://localhost:3306/cswp_202020810?serverTimezone=UTC");
-            config.setUsername("root");
-            config.setPassword("Gkwkak12#");
+            config.setUsername("DaeKuen16");
+            config.setPassword("202020810");
             config.setAutoCommit(false);
             config.setMinimumIdle(3); 
             config.setMaximumPoolSize(10); 

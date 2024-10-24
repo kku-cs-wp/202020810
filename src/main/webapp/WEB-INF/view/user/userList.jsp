@@ -53,7 +53,8 @@
     </script>
     
 <div class="filter-container">
-        <input type="text" id="user-filter" placeholder="이름, 이메일, 역할 또는 사번으로 검색" onkeyup="filterUsers()">
+        <input type="text" id="user-filter" placeholder="이름, 이메일, 역할 또는 사번으로 검색" >
+        <button onclick="filterUsers()">검색하기</button>
 </div>
 
 <div id="refresh">
